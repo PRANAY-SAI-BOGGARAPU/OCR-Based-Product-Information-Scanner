@@ -1,18 +1,18 @@
-A Streamlit-based application that uses Optical Character Recognition (OCR) to scan product labels from images and retrieve product details by matching them with a MongoDB database or the OpenFoodFacts (OFF) API.
+A Streamlit-based web application that scans product labels from images using OCR and retrieves detailed product information by querying a MongoDB database or the OpenFoodFacts (OFF) API.
 
 Features
 
-Upload a product image (JPG, JPEG, PNG)
+Upload Product Images: Supports JPG, JPEG, PNG formats.
 
-Extract text from product label using EasyOCR
+OCR Text Extraction: Uses EasyOCR to read product labels.
 
-Search product information in MongoDB
+Database Search: Finds product details in MongoDB.
 
-Fallback to OpenFoodFacts API if MongoDB doesn’t contain the product
+Fallback API Search: Uses OpenFoodFacts API if product not found in MongoDB.
 
-Multi-language support → Tries English first, auto-translates if needed, else shows original language
+Multi-Language Support: Tries English first; automatically translates if needed.
 
-Displays:
+Displays Key Information:
 
 Product Name
 
@@ -36,12 +36,64 @@ MongoDB – Product database
 
 OpenFoodFacts API – Public food product database
 
-googletrans – Text translation (with fallback)
+googletrans – Text translation
 
-Requirements :
+Installation & Setup
+1. Clone the Repository
+git clone https://github.com/your-username/ocr-product-scanner.git
+cd ocr-product-scanner
+
+2. Create & Activate Python Environment (Optional but Recommended)
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+
+3. Install Required Packages
+pip install -r requirements.txt
+
+
+requirements.txt contents:
 
 streamlit
 easyocr
 pymongo
 requests
 googletrans==4.0.0-rc1
+
+4. Configure MongoDB
+
+Replace the MongoDB URI in db_utils.py with your own:
+
+MONGO_URI = "your_mongodb_connection_string"
+DB_NAME = "your_db_name"
+COLLECTION_NAME = "your_collection_name"
+
+5. Run the Application
+streamlit run main.py
+
+
+The app will open in your default browser at http://localhost:8501.
+
+Upload a product image and view the extracted product details.
+
+Screenshots
+
+You can add a few screenshots here showing:
+
+Uploading an image
+
+OCR extracted text
+
+Displayed product info
+
+Notes
+
+The app first attempts to find a match in MongoDB.
+
+If MongoDB has no match, it uses the OpenFoodFacts API.
+
+Ingredients and nutrition facts are cleaned and displayed in a readable format.
+
+Multi-language support ensures non-English labels are translated automatically.
